@@ -25,7 +25,7 @@ func HttpServerRun() {
 	}
 	go func() {
 		log.Printf(" [INFO] HttpServerRun:%s\n", lib.GetStringConf("base.http.addr"))
-		if err := HttpSrvHandler.ListenAndServe(); err != nil {
+		if err := HttpSrvHandler.ListenAndServe(); err != nil { // 如果不使用goroutine启动HTTP服务器，程序将会被阻塞在 ListenAndServe() 方法上
 			log.Fatalf(" [ERROR] HttpServerRun:%s err:%v\n", lib.GetStringConf("base.http.addr"), err)
 		}
 	}()

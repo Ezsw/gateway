@@ -2,7 +2,9 @@ package lib
 
 import (
 	"bytes"
+	"database/sql"
 	"github.com/spf13/viper"
+	"gorm.io/gorm"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -10,6 +12,9 @@ import (
 
 var ConfBase *BaseConf
 var ViperConfMap map[string]*viper.Viper // viper库用于处理应用程序的配置文件,使用ViperConfMap["config"] 获取名为 "config" 的配置文件
+var DBMapPool map[string]*sql.DB
+var GORMMapPool map[string]*gorm.DB
+var DBDefaultPool *sql.DB
 
 type BaseConf struct {
 	DebugMode    string `mapstructure:"debug_mode"`
@@ -18,6 +23,18 @@ type BaseConf struct {
 		DebugMode    string `mapstructure:"debug_mode"`
 		TimeLocation string `mapstructure:"time_location"`
 	} `mapstructure:"base"`
+}
+
+type MySQLConf struct {
+	DriverName      string `mapstructure:"driver_name"`
+	DataSourceName  string `mapstructure:"data_source_name"`
+	MaxOpenConn     int    `mapstructure:"max_open_conn"`
+	MaxIdleConn     int    `mapstructure:"max_idle_conn"`
+	MaxConnLifeTime int    `mapstructure:"max_conn_life_time"`
+}
+
+type MysqlMapConf struct {
+	List map[string]*MySQLConf `mapstructure:"list"`
 }
 
 // InitViperConf 初始化配置文件

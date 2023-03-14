@@ -19,3 +19,7 @@
     desc="This is a sample server celler server."
     host=""
     base_path=""
+
+[session]
+    redis_server = "127.0.0.1:6379"   #redis session server
+    redis_password = ""

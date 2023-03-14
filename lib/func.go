@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+var TimeLocation *time.Location
 var TimeFormat = "2006-01-02 15:04:05" // go格式化时间123456便于记忆
 
 // InitModule 标准流程
@@ -37,6 +38,20 @@ func initModule(configPath string, modules []string) error {
 		}
 	}
 
+	// 加载mysql配置并初始化实例
+	if InArrayString("mysql", modules) {
+		if err := InitDBPool(GetConfPath("mysql_map")); err != nil {
+			fmt.Printf("[ERROR] %s%s\n", time.Now().Format(TimeFormat), " InitDBPool:"+err.Error())
+		}
+	}
+
+	// 设置时区
+	if location, err := time.LoadLocation(ConfBase.TimeLocation); err != nil {
+		return err
+	} else {
+		TimeLocation = location
+	}
+
 	log.Printf("[INFO] %s\n", " success loading resources.")
 	log.Println("------------------------------------------------------------------------")
 	return nil
@@ -46,6 +61,7 @@ func initModule(configPath string, modules []string) error {
 func Destroy() {
 	log.Println("------------------------------------------------------------------------")
 	log.Printf("[INFO] %s\n", " start destroy resources.")
+	CloseDB()
 
 	log.Printf("[INFO] %s\n", " success destroy resources.")
 }
