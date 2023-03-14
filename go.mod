@@ -7,11 +7,12 @@ require (
 	github.com/gin-gonic/gin v1.9.0
 	github.com/go-playground/locales v0.14.1
 	github.com/go-playground/universal-translator v0.18.1
-	github.com/go-playground/validator/v10 v10.11.2
+	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/spf13/viper v1.15.0
 	github.com/swaggo/files v1.0.0
 	github.com/swaggo/gin-swagger v1.5.3
 	github.com/swaggo/swag v1.8.10
+	golang.org/x/time v0.1.0
 	gopkg.in/go-playground/validator.v9 v9.31.0
 	gorm.io/driver/mysql v1.4.7
 	gorm.io/gorm v1.24.6
@@ -30,9 +31,9 @@ require (
 	github.com/go-openapi/jsonreference v0.19.6 // indirect
 	github.com/go-openapi/spec v0.20.4 // indirect
 	github.com/go-openapi/swag v0.19.15 // indirect
+	github.com/go-playground/validator/v10 v10.11.2 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.10.0 // indirect
-	github.com/gomodule/redigo v2.0.0+incompatible // indirect
 	github.com/gorilla/context v1.1.1 // indirect
 	github.com/gorilla/securecookie v1.1.1 // indirect
 	github.com/gorilla/sessions v1.2.1 // indirect

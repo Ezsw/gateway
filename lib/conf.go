@@ -15,6 +15,7 @@ var ViperConfMap map[string]*viper.Viper // viper库用于处理应用程序的�
 var DBMapPool map[string]*sql.DB
 var GORMMapPool map[string]*gorm.DB
 var DBDefaultPool *sql.DB
+var ConfRedisMap *RedisMapConf
 
 type BaseConf struct {
 	DebugMode    string `mapstructure:"debug_mode"`
@@ -31,6 +32,19 @@ type MySQLConf struct {
 	MaxOpenConn     int    `mapstructure:"max_open_conn"`
 	MaxIdleConn     int    `mapstructure:"max_idle_conn"`
 	MaxConnLifeTime int    `mapstructure:"max_conn_life_time"`
+}
+
+type RedisMapConf struct {
+	List map[string]*RedisConf `mapstructure:"list"`
+}
+
+type RedisConf struct {
+	ProxyList    []string `mapstructure:"proxy_list"`
+	Password     string   `mapstructure:"password"`
+	Db           int      `mapstructure:"db"`
+	ConnTimeout  int      `mapstructure:"conn_timeout"`
+	ReadTimeout  int      `mapstructure:"read_timeout"`
+	WriteTimeout int      `mapstructure:"write_timeout"`
 }
 
 type MysqlMapConf struct {
