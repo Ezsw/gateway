@@ -9,6 +9,7 @@ type ResponseCode int
 
 const (
 	SuccessCode ResponseCode = iota
+	InternalErrorCode
 )
 
 type Response struct {
